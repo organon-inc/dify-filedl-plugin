@@ -1,0 +1,23 @@
+identity:
+  author: your-name
+  name: voucher_files
+  label:
+    en_US: Voucher Files
+    ja_JP: 仕訳ファイル
+  description:
+    en_US: Tools to emit CSV/JSON files for download cards.
+    ja_JP: CSV/JSON をダウンロードカードとして返すツール群
+  icon: ../_assets/icon.svg
+  tags:
+    - utilities
+    - other
+
+# 今回はサードパーティ認証不要のため省略
+# credentials_for_provider: {}
+
+tools:
+  - tools/export_files.yaml
+
+extra:
+  python:
+    source: voucher_files.py
