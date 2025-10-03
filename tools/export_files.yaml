@@ -1,0 +1,85 @@
+identity:
+  name: export_files
+  author: your-name
+  label:
+    en_US: Export Files
+    ja_JP: ファイル出力
+description:
+  human:
+    en_US: Create downloadable files (CSV/JSON) from previous node outputs.
+    ja_JP: 直前ノードの出力から CSV/JSON を作成しダウンロード可能にします
+  llm: Create downloadable files (CSV/JSON) from given strings or JSON.
+
+# LLM/Workflow 双方で使いやすいよう最小限＋柔軟なパラメタを定義
+parameters:
+  - name: mode
+    type: select
+    required: true
+    default: compose
+    label:
+      ja_JP: 動作モード
+      en_US: Mode
+    options:
+      - compose
+      - passthrough
+    human_description:
+      ja_JP: compose は文字列/JSONからファイルを生成、passthrough は files_json をそのまま出力
+      en_US: compose builds files from strings/JSON; passthrough forwards files_json
+    form: form
+
+  - name: files_json
+    type: string
+    required: false
+    label:
+      ja_JP: 既成ファイル(JSON配列)
+      en_US: Files JSON (array)
+    human_description:
+      ja_JP: [{"name":"a.csv","mime_type":"text/csv","b64_content":"..."}] 形式
+      en_US: Array of {name,mime_type,b64_content} for passthrough
+    form: llm
+
+  - name: csv_text
+    type: string
+    required: false
+    label:
+      ja_JP: CSV本文
+      en_US: CSV Text
+    form: llm
+
+  - name: csv_filename
+    type: string
+    required: false
+    default: export.csv
+    label:
+      ja_JP: CSVファイル名
+      en_US: CSV filename
+    form: form
+
+  - name: result
+    type: string
+    required: false
+    label:
+      ja_JP: 結果(JSON文字列または文字列)
+      en_US: Result (JSON string or text)
+    form: llm
+
+  - name: audit
+    type: string
+    required: false
+    label:
+      ja_JP: 監査(JSON文字列または文字列)
+      en_US: Audit (JSON string or text)
+    form: llm
+
+  - name: make_json_files
+    type: boolean
+    required: false
+    default: true
+    label:
+      ja_JP: result/audit を JSON ファイル化
+      en_US: Save result/audit as JSON files
+    form: form
+
+extra:
+  python:
+    source: tools/export_files.py
