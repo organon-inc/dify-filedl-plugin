@@ -1,0 +1,38 @@
+meta:
+  version: 0.0.2
+  minimum_dify_version: 1.9.0
+
+identity:
+  name: voucher-files-export
+  author: your-name
+  label:
+    en_US: Voucher Files Export
+    ja_JP: 仕訳ファイル出力
+  description:
+    en_US: Return files from LLM/Code outputs as downloadable cards.
+    ja_JP: LLM/コード出力をダウンロードカードとして返すツール
+  icon: _assets/icon.svg
+  icon_dark: _assets/icon-dark.svg
+  tags:
+    - utilities
+    - productivity
+    - other
+
+plugins:
+  tools:
+    - provider/voucher_files.yaml
+
+runner:
+  language: python
+  entry: provider/voucher_files.py
+
+requirements:
+  # メモリ要件は必要に応じて
+  memory: 256
+
+permissions:
+  tools: true
+  apps: true
+  storage: true
+  endpoint:
+    enabled: false
